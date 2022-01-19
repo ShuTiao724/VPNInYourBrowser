@@ -102,7 +102,7 @@ def main(path):
         
         if requests.head(request.form['URL']).status_code == 200 or requests.head(request.form['URL']).status_code == 301 or requests.head(request.form['URL']).status_code == 302:
           ips[DeviceID] = request.form['URL']
-          print("\033[92mNew User: total active IPs: " + str(len(ips)) + ", id: " + str(IdUnique) + "\033[0m")
+          print("\033[92mNew User: total active IPs: " + str(len(ips)) + "\033[0m")
         else:
           return render_template("index.html", error=1, home=HOME, KnownURLs=config["KnownURLs"], version=config["Version"], debug=DEBUG_MODE)
 
