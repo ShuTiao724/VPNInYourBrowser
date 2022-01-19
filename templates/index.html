@@ -33,13 +33,16 @@
 
 <body style="background-color: black; color: darkcyan">
 	<div id="loading">
-		<h1>VPN inside browser - BETA V0.1.0 - Proof of concept</h1>
+		<h1>VPN inside browser - {{version}} - BETA </h1>
+    <h2>{% if debug == True %} WARNING: DEBUG MODE ENABLED. SECURITY AT RISK.{% endif %}</h2>
 	</div>
 	<div id="main">
-		USE AT YOU OWN RISK: THIS IS NOT YET SECURE. YOUR IP ADDRESS WILL BE STORED IN ORDER TO KNOW WHICH SITE YOU REQUESTED.
+		USE AT YOU OWN RISK: THIS MAY NOT BE SECURE. YOUR IP ADDRESS WILL BE STORED IN ORDER TO KNOW WHICH SITE YOU REQUESTED.
 		<br/>
 			If you find a page is unable to load a home button, try to go to a 404 page: generally, they are easier for the script to
 			add a home button to. If you still can't go back, go to /?new_site=1
+    <br/> 
+      This site uses essential cookies. Other sites that go through this will have their own cookie policies as well.
 
 			<br/>
 				WARNING: THIS SYSTEM IS NOT CAPABLE OF DETECTING UNSECURE WEBSITES, THEY MAY BE SHOWN AS SECURE. <br/>
@@ -57,14 +60,17 @@
     <form method="post">
       <div id="2" class="hidden" style="text-align: center">
         <h1>Enter URL to connect to:</h1>
-        <div style="display:flex; margin: 10%">
-        <input type="input" name="URL" value="{{home}}" id="URL" style="font-size:30px;height:30px;flex:10">
-        <input type="submit" name="submit" value="GO" style="font-size:30px;flex:1;height:30px;" id="submit" onclick="loading()">
-        </div>
+        <input type="input" name="URL" value="{{home}}" id="URL" style="font-size:30px;height:30px; width: min(50%, 500px);"><br/><br/>
+        <input type="submit" name="submit" value="GO" style="font-size:20px;width:75px;" id="submit" onclick="loading()">
         <h3>The following sites are known to have issues:</h3>
-         <p>https://google.co.uk<br/>
-         https://youtube.co.uk<br/>
-         https://wikipedia.org</br/><br/></p>
+         {% for i in KnownURLs %}
+           {{i}}<br/>
+         {% endfor %}
+         {% if not KnownURLs %}
+         The owner of this VPN has not listed any URLs that do not work
+         {% endif %}
+         
+         <h3>Please only open 1 instance, any more will confuse the server</h3>
          <h3>BETA - SECURITY NOT GUARANTEED</h3>
 
       </div>

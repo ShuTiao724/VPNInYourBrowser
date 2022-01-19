@@ -1,4 +1,5 @@
 {
+  "Version": "0.1.1",
   "Regions": ["GB", "US"],
   "URL": "https://bing.co.uk",
   "KnownURLs": ["https://google.co.uk", "https://youtube.co.uk", "https://wikipedia.co.uk"]
