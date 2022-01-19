@@ -11,11 +11,21 @@ A vpn that sits in your browser, accessible via a website
 
 ## **Options**
 
-Region: region to allow
+***Region***: Region to allow. This is the 2 letter country code, e.g. GB or US.
+<br/> Type: Array
+<br/> Default: ["GB", "US"]
+<br/> Note: be careful which countries you allow: in some, VPNs are illegal so do research before adding a country
 
-URL: startup url
 
-KnownURLs: file - leave blank for automatic updates
+***URL***: Startup url
+<br/>Type: String
+<br/>Default: "https://bing.co.uk"
+<br/>Note: the "https://" or "http://" part of the URL is required.
+
+***KnownURLs***: Array - This is an array containing URLs that do not work with the VPN.
+<br/>Type: Array
+<br/>Default: ["https://google.co.uk", "https://youtube.co.uk", "https://wikipedia.co.uk"]
+<br/>Note: The software **DOES NOT** block these URLs, it justs shows a message on the homne screen.
 
 
 ## **Please note**
