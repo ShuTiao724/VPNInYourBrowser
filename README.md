@@ -1,7 +1,7 @@
 # VPNInYourBrowser
 A vpn that sits in your browser, accessible via a website
 
-Example setup: https://VPN.jaffa42.repl.co
+Example setup: https://BrowserVPN.jaffa42.repl.co
 
 ## **Setup**
 1. Put the code onto the server of your choice (provided it supports python). Remplit is recommended as I have made a copy already on there (link goes here).
