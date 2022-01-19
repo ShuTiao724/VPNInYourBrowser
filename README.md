@@ -1,4 +1,4 @@
-# BrowserVPN
+# VPNInYourBrowser
 A vpn that sits in your browser, accessible via a website
 
 Example setup: https://VPN.jaffa42.repl.co
