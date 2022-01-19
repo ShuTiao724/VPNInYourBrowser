@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>VPN</title>
+	<style>
+		.hidden {
+			visibility: hidden;
+		}
+
+		.visible {
+			visibility: visible;
+		}
+	</style>
+	<script>
+		function p2()
+      {
+        setTimeout(500);
+        document.getElementById("1").className="hidden";
+        document.getElementById("main").className="hidden";
+        setTimeout(100);
+        document.getElementById("2").className="visible";
+
+      }
+      function loading()
+      {
+        setTimeout(500);
+        document.getElementById("loading").innerHTML="<h1>Loading requested site...</h1>";
+      }
+	</script>
+</head>
+
+<body style="background-color: black; color: darkcyan">
+	<div id="loading">
+		<h1>VPN inside browser - BETA V0.1.0 - Proof of concept</h1>
+	</div>
+	<div id="main">
+		USE AT YOU OWN RISK: THIS IS NOT YET SECURE. YOUR IP ADDRESS WILL BE STORED IN ORDER TO KNOW WHICH SITE YOU REQUESTED.
+		<br/>
+			If you find a page is unable to load a home button, try to go to a 404 page: generally, they are easier for the script to
+			add a home button to. If you still can't go back, go to /?new_site=1
+
+			<br/>
+				WARNING: THIS SYSTEM IS NOT CAPABLE OF DETECTING UNSECURE WEBSITES, THEY MAY BE SHOWN AS SECURE. <br/>
+					Please don't use for macicious purposes :)
+					<H3>
+						{% if error == 1 %} Invalid URL {% endif %}
+
+					</H3>
+	</div>
+	<div id="1" class="visible">
+		<h2>To start, agree to the above terms</h2>
+
+		<input type="button" name="OK" value="Agree & continue" style="font-size: 15px" onclick="p2()" id = "btn"><br/>
+      </div>
+    <form method="post">
+      <div id="2" class="hidden" style="text-align: center">
+        <h1>Enter URL to connect to:</h1>
+        <div style="display:flex; margin: 10%">
+        <input type="input" name="URL" value="{{home}}" id="URL" style="font-size:30px;height:30px;flex:10">
+        <input type="submit" name="submit" value="GO" style="font-size:30px;flex:1;height:30px;" id="submit" onclick="loading()">
+        </div>
+        <h3>The following sites are known to have issues:</h3>
+         <p>https://google.co.uk<br/>
+         https://youtube.co.uk<br/>
+         https://wikipedia.org</br/><br/></p>
+         <h3>BETA - SECURITY NOT GUARANTEED</h3>
+
+      </div>
+
+
+        
+    </form>
+    
+</body>
+</html>
