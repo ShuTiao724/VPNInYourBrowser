@@ -11,6 +11,11 @@ A vpn that sits in your browser, accessible via a website
 
 ## **Options**
 
+***Version***: Version: set this to the curresnt version.
+<br/> Type: String
+<br/> Default: "0.1.1"
+
+
 ***Region***: Region to allow. This is the 2 letter country code, e.g. GB or US.
 <br/> Type: Array
 <br/> Default: ["GB", "US"]
@@ -31,3 +36,7 @@ A vpn that sits in your browser, accessible via a website
 ## **Please note**
 
 This is still in development, there may be security issues.
+
+The following packages that are not pre installed to python are:
+- Gevent
+ <br/> You can install this via ```pip3 install gevent```
