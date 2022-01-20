@@ -4,6 +4,9 @@ import os
 global CURRENTNUM
 CURRENTNUM = 0
 
+BG = "black"
+FG = "darkcyan"
+
 from gevent.pywsgi import WSGIServer
 import json
 import requests
@@ -50,7 +53,7 @@ def returnVal(val):
 def main(path):
     NeedsToSetID = ""
     #return "Being changed to work with github"
-    x_forward = False
+    X_forward = False
     if "X-Forwarded-For" in request.headers:
       X_forward= True
     if X_forward:
@@ -59,7 +62,7 @@ def main(path):
       IP = request.remote_addr
     if IP in ipsCache.keys():
       if ipsCache[IP] not in COUNTRY:
-        return render_template("wrongRegion.html", r=ipJson["country_name"])
+        return render_template("wrongRegion.html", r=ipJson["country_name"], fg=FG, bg=BG)
     else:
       if X_forward:
         ipResponse = requests.get("https://geolocation-db.com/json/" + request.headers["X-Forwarded-For"] + "", verify=True)
@@ -80,7 +83,7 @@ def main(path):
         return "ERROR - UNABLE TO IDENTIFY REGION. CONNECTION REFUSED."
         
       if ipJson["country_code"] not in COUNTRY:
-        return render_template("wrongRegion.html", r=ipJson["country_name"], regions=COUNTRY)
+        return render_template("wrongRegion.html", r=ipJson["country_name"], regions=COUNTRY, fg=FG, bg=BG)
       ipsCache[IP] = ipJson["country_code"]
     if "VPN_DEVICE_ID_VALUE" in request.cookies:
       IdUnique = request.cookies.get("VPN_DEVICE_ID_VALUE")
@@ -97,14 +100,14 @@ def main(path):
       return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
     if DeviceID not in list(ips.keys()):
       if request.method == "GET":
-        return render_template("index.html", error=0, home=HOME, KnownURLs=config["KnownURLs"], version=config["Version"], debug=DEBUG_MODE)
+        return render_template("index.html", error=0, home=HOME, KnownURLs=config["KnownURLs"], version=config["Version"], debug=DEBUG_MODE, fg=FG, bg=BG)
       else:
         
         if requests.head(request.form['URL']).status_code == 200 or requests.head(request.form['URL']).status_code == 301 or requests.head(request.form['URL']).status_code == 302:
           ips[DeviceID] = request.form['URL']
           print("\033[92mNew User: total active IPs: " + str(len(ips)) + "\033[0m")
         else:
-          return render_template("index.html", error=1, home=HOME, KnownURLs=config["KnownURLs"], version=config["Version"], debug=DEBUG_MODE)
+          return render_template("index.html", error=1, home=HOME, KnownURLs=config["KnownURLs"], version=config["Version"], debug=DEBUG_MODE, fg=FG, bg=BG)
 
 
     redirectVal = ""
@@ -126,7 +129,7 @@ def main(path):
             except:
               ips.pop(DeviceID)
       if redirectVal != "":
-        return redirect(redirectVal)
+        return redirect(redirectVal, fg=FG, bg=BG)
       else:
         return redirect("/")
     if DeviceID in list(ips.keys()):
@@ -186,7 +189,7 @@ def main(path):
 
     else:
       url = path
-      return render_template("404Error.html", page=url)
+      return render_template("404Error.html", page=url, fg=FG, bg=BG)
 
       
 if DEBUG_MODE == True:
