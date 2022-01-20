@@ -34,6 +34,12 @@ Example setup: https://VPNInBrowser.jaffa42.repl.co
 <br/>Default: ["https://google.co.uk", "https://youtube.co.uk", "https://wikipedia.co.uk"]
 <br/>Note: The software **DOES NOT** block these URLs, it justs shows a message on the homne screen.
 
+***fg***: Text colour
+<br/>Type: String
+
+***bg***: Background colour
+<br/>Type: String
+
 
 ## **Please note**
 

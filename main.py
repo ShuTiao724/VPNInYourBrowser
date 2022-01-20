@@ -4,8 +4,7 @@ import os
 global CURRENTNUM
 CURRENTNUM = 0
 
-BG = "black"
-FG = "darkcyan"
+
 
 from gevent.pywsgi import WSGIServer
 import json
@@ -19,6 +18,8 @@ print("\033[94m", end="")
 print("Version: " + config["Version"])
 print("Regions: " + str(config["Regions"]))
 print("Default URL: " + config["URL"])
+print("fg: " + config["fg"])
+print("bg: " + config["bg"])
 print("\033[93m", end="")
 print("Known URLs to fail: ")
 for i in config["KnownURLs"]:
@@ -32,6 +33,8 @@ configFile.close()
 COUNTRY = config["Regions"]
 DEBUG_MODE=False
 HOME = config["URL"]
+BG = config["bg"]
+FG = config["fg"]
 
 HOME_BUTTON = "<div style=\"z-index: 0\"><a href=\"/?new_site=1\" target=\"_self\"><input type=\"button\", value=\"CLOSE\" style=\"position: absolute; color:white; font-size:35px; background-color:darkcyan; cursor: pointer; top:0; z-index:-10; left: 0; htight: 75px\"></a></div><p style=\"font-size:25px;position: absolute;  top:0; z-index:-10; right: 0\">site: "
 HOME_BUTTON_TOP = "<div style=\"z-index: 0\"><a href=\"/?new_site=1\" target=\"_self\"><input type=\"button\", value=\"CLOSE\" style=\"position: auto; color:white; font-size:35px; background-color:darkcyan; cursor: pointer; top:0; z-index:-10; left: 0; htight: 75px\"></a></div><p style=\"font-size:25px;position: absolute;  top:0; z-index:-10; right: 0\">site: "
@@ -102,11 +105,13 @@ def main(path):
       if request.method == "GET":
         return render_template("index.html", error=0, home=HOME, KnownURLs=config["KnownURLs"], version=config["Version"], debug=DEBUG_MODE, fg=FG, bg=BG)
       else:
-        
-        if requests.head(request.form['URL']).status_code == 200 or requests.head(request.form['URL']).status_code == 301 or requests.head(request.form['URL']).status_code == 302:
-          ips[DeviceID] = request.form['URL']
-          print("\033[92mNew User: total active IPs: " + str(len(ips)) + "\033[0m")
-        else:
+        try:
+          if requests.head(request.form['URL']).status_code == 200 or requests.head(request.form['URL']).status_code == 301 or requests.head(request.form['URL']).status_code == 302:
+            ips[DeviceID] = request.form['URL']
+            print("\033[92mNew User: total active IPs: " + str(len(ips)) + "\033[0m")
+          else:
+            return render_template("index.html", error=1, home=HOME, KnownURLs=config["KnownURLs"], version=config["Version"], debug=DEBUG_MODE, fg=FG, bg=BG)
+        except:
           return render_template("index.html", error=1, home=HOME, KnownURLs=config["KnownURLs"], version=config["Version"], debug=DEBUG_MODE, fg=FG, bg=BG)
 
 
