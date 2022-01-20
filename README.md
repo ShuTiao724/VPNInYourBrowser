@@ -36,9 +36,11 @@ Example setup: https://VPNInBrowser.jaffa42.repl.co
 
 ***fg***: Text colour
 <br/>Type: String
+<br/>Default: "darkcyan"
 
 ***bg***: Background colour
 <br/>Type: String
+<br/>Default: "black"
 
 
 ## **Please note**
